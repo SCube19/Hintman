@@ -11,6 +11,7 @@
   "devDependencies": {
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.2",
+    "fabricjs": "^1.0.0",
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.7.0",
     "prettier": "^2.7.1",
@@ -22,6 +23,7 @@
     "@cheprasov/qrcode": "^0.1.0",
     "export-loader": "^1.0.52",
     "exports-loader": "^4.0.0",
+    "fabric": "^5.2.4",
     "qrcodejs": "^1.0.0"
   }
 }
