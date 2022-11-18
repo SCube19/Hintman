@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "canvasjs": "^1.8.3",
+    "firebase": "^9.14.0"
+  }
+}
