@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "366527975531",
+    "project_id": "hintman-f86e1",
+    "storage_bucket": "hintman-f86e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366527975531:android:1eac78c3bf9b34d215e12e",
+        "android_client_info": {
+          "package_name": "com.example.hintman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "366527975531-o2sql8j6aocsf1ggc4hv30c6n2tajo7k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hintman",
+            "certificate_hash": "331bba2eba2b878575a33174d619fe88b17fb2d8"
+          }
+        },
+        {
+          "client_id": "366527975531-jtieltoi4ckac68ut17qltm12pf6l38t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCioQT9J7wzD5ndYQl0ZIwMR5SnuwpP_5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "366527975531-jtieltoi4ckac68ut17qltm12pf6l38t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
