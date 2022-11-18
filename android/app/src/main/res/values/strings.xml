@@ -25,4 +25,15 @@
     <string name="login_in_account">Log in to your account</string>
     <string name="login_in">Log in</string>
     <string name="register">Register</string>
+
+    <string name="welcome">Welcome to Hintman!</string>
+    <string name="app_info">Hintman is a password hint manager that allows for creating and storing
+    hints for your passwords. Here you can scan the qr code in the google chrome extension to see the
+    passwords hint for the current website.</string>
+    <string name="use_scanner">Try it now!</string>
+
+    <string name="no_hint">"You do not have a hint for this page"</string>
+    <string name="page_hint">Hint for the page %1$s</string>
+
+    <string name="scan_again">Scan again</string>
 </resources>
