@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -100,6 +101,7 @@ public class MailRegisterActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "registerUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            assert user != null;
                             loginUser(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -113,17 +115,15 @@ public class MailRegisterActivity extends AppCompatActivity {
 
     /* Performs basic setup before moving on to Main Activity */
     private void loginUser(FirebaseUser user) {
-//        SharedPreferences preferences = getSharedPreferences("autoLogin", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = preferences.edit();
-//        editor.putString("isLogged", "true");
-//        editor.putString("logged_name", name);
-//        editor.putString("logged_surname", surname);
-//        editor.putString("logged_mail", mail);
-//        editor.apply(); //For auto login
+        SharedPreferences preferences = getSharedPreferences("autoLogin", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("isLogged", "true");
+        editor.putString("logged_mail", user.getEmail());
+        editor.apply();
 
         Intent intent = new Intent(this, InfoActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//        intent.putExtra("logged_mail", mail);
+        intent.putExtra("logged_mail", user.getEmail());
         startActivity(intent);
         MailRegisterActivity.this.finish();
     }

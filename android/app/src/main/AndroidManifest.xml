@@ -10,21 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hintman">
         <activity
+            android:name=".MailAuthActivity"
+            android:theme="@style/Theme.Hintman.NoActionBar" />
+        <activity
             android:name=".InfoActivity"
             android:theme="@style/Theme.Hintman.NoActionBar" />
         <activity
             android:name=".MailRegisterActivity"
             android:theme="@style/Theme.Hintman.NoActionBar" />
         <activity
-            android:name=".MailAuthActivity"
+            android:name=".SplashActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Hintman.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
