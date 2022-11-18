@@ -106,12 +106,11 @@ public class MailAuthActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("autoLogin", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("isLogged", "true");
-        editor.putString("logged_mail", user.getEmail());
+        editor.putString("loggedMail", user.getEmail());
         editor.apply();
 
         Intent intent = new Intent(this, InfoActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("logged_mail", user.getEmail());
         startActivity(intent);
         MailAuthActivity.this.finish();
     }

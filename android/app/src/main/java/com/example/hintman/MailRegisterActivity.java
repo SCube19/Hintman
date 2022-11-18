@@ -118,7 +118,7 @@ public class MailRegisterActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("autoLogin", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("isLogged", "true");
-        editor.putString("logged_mail", user.getEmail());
+        editor.putString("loggedMail", user.getEmail());
         editor.apply();
 
         Intent intent = new Intent(this, InfoActivity.class);
