@@ -16,8 +16,13 @@
     "default_title": "Ext",
     "default_popup": "popup.html"
   },
-  "permissions": [
-    "storage"
+  "permissions": ["activeTab",
+  "scripting",
+  "webRequest",
+  "storage"
+  ],
+  "host_permissions": [
+    "*://*/*"
   ],
   "content_scripts": [
     {
