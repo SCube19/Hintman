@@ -111,7 +111,7 @@ const backgroundColor = 255;
 
 let strokeColor = '#000000';
 let tool = 'pencil';
-let weight = 10;
+let weight = 1;
 let mode = "draw";
 let canvas;
 
@@ -120,7 +120,7 @@ let s = (P5) => {
         canvas = P5.createCanvas(size, size);
         P5.background(backgroundColor);
         canvas.style('pointer-events', 'none');
-        canvas.clear();
+        canvas.background(backgroundColor);
     }
 
     P5.draw = () => {
@@ -146,7 +146,6 @@ let s = (P5) => {
                         P5.mouseX, P5.mouseY - weight,
                         P5.mouseX + Math.sqrt(3) / 2 * weight, P5.mouseY + weight / 2
                     );
-                    //console.log(`${P5.mouseX - Math.sqrt(3) / 2 * weight} ${P5.mouseY + weight / 2} ${P5.moouseX} ${P5.mouseY + weight} ${P5.mouseX + Math.sqrt(3) / 2 * weight} ${P5.mouseY + weight / 2} `);
                     break;
 
             }
@@ -160,17 +159,21 @@ let buttons = document.querySelectorAll('button');
 
 buttons.forEach(btn => {
     btn.addEventListener('click', (e) => {
-        switch (e.target.id) {
+        switch (e.currentTarget.id) {
             case "pencil":
             case "circle":
             case "rect":
             case "triangle":
-                tool = e.target.id;
+                console.log(document.getElementById(tool));
+                document.getElementById(tool).classList.remove('active-btn');
+                tool = e.currentTarget.id;
                 break;
             case "draw":
             case "eraser":
-                mode = e.target.id;
+                document.getElementById(mode).classList.remove('active-btn');
+                mode = e.currentTarget.id;
         }
+        e.currentTarget.classList.add('active-btn');
     })
 })
 
