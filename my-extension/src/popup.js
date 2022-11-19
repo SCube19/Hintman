@@ -32,7 +32,7 @@ const fbstorage = getStorage();
 
         if (localStorage.getItem("email") !== null) {
             document.getElementById("login").style.display = "none";
-            document.getElementById("loggedIn").style.display = "block";  
+            document.getElementById("loggedIn").style.display = "block";
         }
     }
 
@@ -112,6 +112,7 @@ const fbstorage = getStorage();
 
 
     document.addEventListener('DOMContentLoaded', startFunction);
+    document.addEventListener('DOMContentLoaded', firebaseConfig);
 })();
 
 
