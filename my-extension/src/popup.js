@@ -194,15 +194,20 @@ const rootElement = document.getElementById("emoji-palette");
 const picker = createPicker({ rootElement });
 
 let emojiArray = [];
+let emojiString = "";
 
 picker.addEventListener('emoji:select', event => {
+  if (emojiArray.length == 9)
+    return;
   emojiArray.push(event.emoji);
-  emojiField.innerText = emojiArray.join("");
+  emojiString = emojiArray.join("");
+  canvas_emoji.background(backgroundColor);
 });
 
 emojiBackspace.addEventListener("click", () => {
   emojiArray.pop();
-  emojiField.innerText = emojiArray.join("");
+  emojiString = emojiArray.join("");
+  canvas_emoji.background(backgroundColor);
 });
 
 
@@ -219,9 +224,31 @@ switchButton.addEventListener("click", () => {
     canvasContainer.style.display = "none";
     emojiContainer.style.display = "block";
     emojiArray = [];
-    emojiField.innerText = "";
+    emojiString = "";
+    canvas_emoji.background(backgroundColor);
   }
 });
+
+let canvas_emoji;
+
+let ss = (P5) => {
+  P5.setup = () => {
+      canvas_emoji = P5.createCanvas(size, size);
+      P5.background(backgroundColor);
+      P5.textSize(50);
+      canvas_emoji.style('pointer-events', 'none');
+      canvas_emoji.clear();
+      P5.textAlign(P5.CENTER)
+      // P5.text('😜😂😍', size/2, size/2);
+      // P5.text('☀️🌬️🛬', size/2, size/2 + 100);
+  }
+
+  P5.draw = () => {
+    P5.text(emojiString, size/2, size/2);
+  }
+}
+
+const P52 = new p5(ss, "emoji-field");
 
 
 
