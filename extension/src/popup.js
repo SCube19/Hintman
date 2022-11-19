@@ -125,3 +125,11 @@ const qrSVG = new QRCodeSVG('https://github.com/cheprasov/js-qrcode/', {
 console.log(qrSVG.toString());
 
 document.getElementById('qrcode').innerHTML = qrSVG.toString();
+
+(() => {
+    chrome.runtime.onMessage.addListener((obj, sender, response) => {
+        const { data } = obj;
+        console.log(data);
+        document.getElementById('qrcode').innerHTML = "xd";
+    });
+})();
