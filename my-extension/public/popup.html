@@ -6,30 +6,43 @@
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <div class="app">
-      <p class="counter-label">Counter</p>
-      <div id="counter" class="counter"></div>
-      <div class="button-container">
-        <button id="decrementBtn" class="button">-</button>
-        <button id="incrementBtn" class="button">+</button>
-      </div>
-
-      <hr class="divider" />
-
-      <p class="title">Chrome Extension is Ready!</p>
-      <p class="subtitle">Start by updating <code>popup.html</code></p>
-    </div>
-
     <script src="popup.js"></script>
 
-    <!--
-      This HTML file opens when you click on icon from the toolbar.
+    <div id="loggedIn" style="display: none">
+      <div id="qrcode">no qr code :(</div>
+      <div id="website_url">no url :(</div>
+      <button id="logout">Log out</button>
+    </div>
 
-      To begin the development, run `npm run watch`.
-      To create a production bundle, use `npm run build`.
-    -->
-    <div id="qrcode">no qr code :(</div>
-    <div id="website_url">no url :(</div>
+    <div id="register" style="display: none">
+      <form id="register_form">
+        <label>Mail
+            <input type="mail" name="mail_input" id="mail_input"> <br>
+        </label>
+        <label>Password
+            <input type="password" name="password_input" id="password_input"> <br>
+        </label>
+        <label>Confirm Password
+            <input type="password" name="conf_password_input" id="conf_password_input">
+        </label> <br>
+        <button>Submit</button>
+      </form> <br>
+      <text>Already have an account?</text> <br>
+      <button id="goToLogin">Log in</button>
+    </div>
 
+    <div id="login" style="display: block">
+      <form id="login_form">
+        <label>Mail
+            <input type="mail" name="mail_input" id="mail_input"> <br>
+        </label>
+        <label>Password
+            <input type="password" name="password_input" id="password_input"> <br>
+        </label>
+        <button>Submit</button>
+      </form> <br>
+      <text>Don't have an account?</text> <br>
+      <button id="goToRegister">Create an account</button>
+    </div>
   </body>
 </html>

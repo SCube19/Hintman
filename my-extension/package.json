@@ -24,6 +24,7 @@
         "export-loader": "^1.0.52",
         "exports-loader": "^4.0.0",
         "fabric": "^5.2.4",
+        "firebase": "^9.14.0",
         "qrcodejs": "^1.0.0"
     }
 }
