@@ -7,7 +7,6 @@
     android:background="@color/background_color"
     tools:context=".MailAuthActivity">
 
-
     <TextView
         android:id="@+id/other_option"
         android:layout_width="wrap_content"
@@ -15,24 +14,23 @@
         android:fontFamily="sans-serif-medium"
         android:text="@string/dont_have"
         android:textColor="@color/text_color"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button"
-        app:layout_constraintVertical_bias="0.06999999"
-        />
+        app:layout_constraintVertical_bias="0.17" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/register_activity_button"
-        android:layout_width="147dp"
-        android:layout_height="44dp"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/transparent"
+        android:background="@drawable/button_border"
         android:text="@string/create_account"
         android:textAllCaps="false"
         android:textColor="@color/text_color"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/other_option" />
@@ -41,10 +39,11 @@
         android:id="@+id/email_textfield"
         android:layout_width="244dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="@color/text_color"
         android:ems="10"
         android:hint="@string/email"
+        android:autofillHints="@string/email"
         android:inputType="textEmailAddress"
         android:textColor="@color/text_color"
         android:textColorHint="@color/text_color"
@@ -62,33 +61,35 @@
         android:inputType="textPassword"
         android:textColor="@color/text_color"
         android:textColorHint="@color/text_color"
+        android:autofillHints="@string/password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.48000002" />
+        app:layout_constraintVertical_bias="0.48" />
 
     <TextView
         android:id="@+id/loginin_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
         android:text="@string/login_in_account"
         android:textColor="@color/text_color"
-        android:textSize="18sp"
+        android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/email_textfield"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/login_button"
-        android:layout_width="244dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_border"
         android:text="@string/login_in"
         android:textColor="@color/text_color"
+        android:textSize="20sp"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_textfield" />

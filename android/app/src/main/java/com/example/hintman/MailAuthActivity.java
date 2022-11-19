@@ -2,6 +2,7 @@ package com.example.hintman;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -81,6 +82,12 @@ public class MailAuthActivity extends AppCompatActivity {
         String mail = etMail.getText().toString().trim();
         String pass = etPass.getText().toString().trim();
 
+        if (mail.isEmpty() || pass.isEmpty()) {
+            Toast.makeText(MailAuthActivity.this, "Authentication failed",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         mAuth.signInWithEmailAndPassword(mail, pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -109,7 +116,7 @@ public class MailAuthActivity extends AppCompatActivity {
         editor.putString("loggedMail", user.getEmail());
         editor.apply();
 
-        Intent intent = new Intent(this, InfoActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         MailAuthActivity.this.finish();

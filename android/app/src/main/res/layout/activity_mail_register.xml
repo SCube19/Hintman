@@ -11,15 +11,14 @@
         android:id="@+id/Tasqr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/app_name"
         android:textColor="@color/text_color"
-        android:textSize="30sp"
+        android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/account_creation_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/other_option"
@@ -29,21 +28,23 @@
         android:fontFamily="sans-serif-medium"
         android:text="@string/already_have"
         android:textColor="@color/text_color"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_button" />
+        app:layout_constraintTop_toBottomOf="@+id/register_button"
+        app:layout_constraintVertical_bias="0.13" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/login_activity_button"
-        android:layout_width="147dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="3dp"
-        android:background="@android:color/transparent"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_border"
         android:text="@string/login_in"
         android:textAllCaps="false"
         android:textColor="@color/text_color"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/other_option" />
@@ -63,13 +64,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.37" />
 
     <EditText
         android:id="@+id/password_textfield"
         android:layout_width="244dp"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="@color/text_color"
         android:ems="10"
         android:fontFamily="sans-serif-medium"
@@ -85,25 +86,27 @@
         android:id="@+id/account_creation_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/creation"
         android:textColor="@color/text_color"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/email_textfield"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.90999997" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/register_button"
-        android:layout_width="244dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/transparent"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_border"
         android:text="@string/register"
         android:textColor="@color/text_color"
-        android:textSize="14sp"
+        android:textSize="20sp"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirmpassword_textfield" />
@@ -112,14 +115,14 @@
         android:id="@+id/confirmpassword_textfield"
         android:layout_width="244dp"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/text_color"
         android:ems="10"
         android:fontFamily="sans-serif-medium"
         android:hint="@string/confirmpassword"
         android:inputType="textPassword"
         android:textColor="@color/text_color"
         android:textColorHint="@color/text_color"
-        android:backgroundTint="@color/text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_textfield" />

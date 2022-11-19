@@ -2,6 +2,7 @@ package com.example.hintman;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -88,10 +89,17 @@ public class MailRegisterActivity extends AppCompatActivity {
      * max 40 letters only and min of 1 letter.  */
     private void validateInput(String[] data) {
 
+        if (data[MAIL_IND].isEmpty() || data[PASS_IND].isEmpty() || data[CONPASS_IND].isEmpty()) {
+            Toast.makeText(MailRegisterActivity.this, "Registration failed",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (!data[PASS_IND].equals(data[CONPASS_IND])) {
             Log.w(TAG, "registerUserWithEmail:failure");
             Toast.makeText(MailRegisterActivity.this, "Passwords are not equal",
                     Toast.LENGTH_SHORT).show();
+            return;
         }
         mAuth.createUserWithEmailAndPassword(data[MAIL_IND], data[PASS_IND])
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -106,7 +114,7 @@ public class MailRegisterActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "registerUserWithEmail:failure", task.getException());
-                            Toast.makeText(MailRegisterActivity.this, "Authentication failed",
+                            Toast.makeText(MailRegisterActivity.this, "Registration failed",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }

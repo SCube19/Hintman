@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
                 String isLogged = preferences.getString("isLogged", "");
 
                 if (isLogged.equals("true")) {
-                    mainIntent = new Intent(SplashActivity.this, InfoActivity.class); //TODO change to camera activity
+                    mainIntent = new Intent(SplashActivity.this, MainActivity.class);
                     mainIntent.putExtra("logged_name", preferences.getString("logged_name", ""));
                     mainIntent.putExtra("logged_surname", preferences.getString("logged_surname", ""));
                     mainIntent.putExtra("logged_mail", preferences.getString("logged_mail", ""));
