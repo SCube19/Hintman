@@ -16,30 +16,29 @@
             <div id="canvas"></div>
             <div class="canvas-options">
                 <div class="canvas-modes">
-                    <button id="draw">()</button>
-                    <button id="eraser">#</button>
+                    <button class="option-btn active-btn" id="draw"><img src="icons/pen-tool.png"/></button>
+                    <button class="option-btn" id="eraser"><img src="icons/eraser.png"/></button>
+                    <button class="option-btn" id="emoji"><img src="icons/emoji.png"></button>
+                    <button class="option-btn" id="clear"><img src="icons/clear.png"></button>
                 </div>
                 <div class="canvas-values">
-                    <input type="color" id="canvas-color" />
-                    <input style="width: 3.7em" type="number" id="canvas-weight" />
+                    <input class="color-btn" style="width: 4.3em" type="color" id="canvas-color" />
+                    <input style="width: 3.7em" type="range" min="1" max="50" value="1" id="canvas-weight" />
                 </div>
                 <div id="canvas-tools">
-                    <button id="pencil">I</button>
-                    <button id="rect">[]</button>
-                    <button id="circle">O</button>
-                    <button id="triangle">^</button>
+                    <button class="option-btn active-btn" id="pencil"><img src="icons/random-line.png"/></button>
+                    <button class="option-btn" id="rect"><img src="icons/square.png"/></button>
+                    <button class="option-btn" id="circle"><img src="icons/circle.png"/></button>
+                    <button class="option-btn" id="triangle"><img src="icons/triangle.png"/></button>
                 </div>
-                <div>
-                    <button id="save">save</button>
+                <div id="canvas-save">
+                    <button class="option-btn" id="save"><img src="icons/save.png"/></button>
                 </div>
             </div>
         </div>
-        <div id="emoji-container" style="display: none">
-          <div id="emoji-field"></div>
-          <button id="emoji-backspace"><</button>
-          <div id="emoji-palette"></div>
+        <div id="emoji-container" style="display: none;">
+            <div id="emoji-palette"></div>
         </div>
-        <button id="switch">Switch hint type</button>
     </div>
 
     <div id="register" style="display: none">
