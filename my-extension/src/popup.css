@@ -12,8 +12,11 @@ body {
     padding: 0;
     margin: 0;
     background-color: var(--grey);
-    width: 600px;
-    height: 400px;
+    color: white;
+    font-size: large;
+    width: 400px;
+    margin-top: 2em;
+    margin-bottom: 2em;
 }
 
 .canvas-options {
@@ -21,7 +24,6 @@ body {
     justify-content: center;
     gap: 1em;
     margin-top: 1em;
-    margin-bottom: 1em;
     background: var(--black);
     margin-left: auto;
     margin-right: auto;
@@ -112,4 +114,57 @@ input {
 #emoji-palette {
     display: flex;
     justify-content: space-around;
+}
+
+.action-btn {
+    border: none;
+    color: white;
+    font-size: 1.1em;
+    background-color: var(--green-secondary);
+    box-shadow: 5px 5px #d457b5;
+    transition: all 0.2s cubic-bezier(0.34, 0.48, 0.92, 1)
+}
+
+.action-btn:hover,
+#logout:hover {
+    filter: brightness(120%);
+    transition: all 0.2s cubic-bezier(0.34, 0.48, 0.92, 1)
+}
+
+#logout {
+    border: none;
+    color: white;
+    background-color: red;
+    box-shadow: 5px 5px cyan;
+    aspect-ratio: 1/1;
+    position: absolute;
+    left: 1em;
+    top: 1em;
+    transition: all 0.2s cubic-bezier(0.34, 0.48, 0.92, 1)
+}
+
+#qrcode {
+    width: 350px;
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#register,
+#login {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+#login_form,
+#register_form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-bottom: 1.2em;
+}
+
+.alend {
+    align-self: end;
 }
