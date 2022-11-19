@@ -8,61 +8,97 @@
 </head>
 
 <body>
-    <div class="app">
-        <p class="counter-label">Counter</p>
-        <div id="counter" class="counter"></div>
-        <div class="button-container">
-            <button id="decrementBtn" class="button">-</button>
-            <button id="incrementBtn" class="button">+</button>
+    <div id="loggedIn" style="display: none">
+        <div class="app">
+            <p class="counter-label">Counter</p>
+            <div id="counter" class="counter"></div>
+            <div class="button-container">
+                <button id="decrementBtn" class="button" >-</button>
+                <button id="incrementBtn" class="button">+</button>
+            </div>
+
+            <hr class="divider" />
+
+            <p class="title">Chrome Extension is Ready!</p>
+            <p class="subtitle">Start by updating <code>popup.html</code></p>
         </div>
+        <div id="qrcode">Something</div>
+        <script src="popup.js"></script>
 
-        <hr class="divider" />
+        <div class="canvas-container" style="width: 500px; height: 500px; position: relative; user-select: none;"><canvas id="c" width="500" height="500" style="border: 1px solid rgb(170, 170, 170); position: absolute; width: 500px; height: 500px; left: 0px; top: 0px; touch-action: none; user-select: none;" class="lower-canvas"></canvas><canvas class="upper-canvas "
+                width="500" height="500" style="border: 1px solid rgb(170, 170, 170); position: absolute; width: 500px; height: 500px; left: 0px; top: 0px; touch-action: none; user-select: none; cursor: default;"></canvas></div>
 
-        <p class="title">Chrome Extension is Ready!</p>
-        <p class="subtitle">Start by updating <code>popup.html</code></p>
-    </div>
-    <div id="qrcode">Something</div>
-    <script src="popup.js"></script>
+        <div style="display: inline-block; margin-left: 10px">
+            <button id="drawing-mode" class="btn btn-info">Cancel drawing mode</button><br>
+            <button id="clear-canvas" class="btn btn-info">Clear</button><br>
 
-    <div class="canvas-container" style="width: 500px; height: 500px; position: relative; user-select: none;"><canvas id="c" width="500" height="500" style="border: 1px solid rgb(170, 170, 170); position: absolute; width: 500px; height: 500px; left: 0px; top: 0px; touch-action: none; user-select: none;" class="lower-canvas"></canvas><canvas class="upper-canvas "
-            width="500" height="500" style="border: 1px solid rgb(170, 170, 170); position: absolute; width: 500px; height: 500px; left: 0px; top: 0px; touch-action: none; user-select: none; cursor: default;"></canvas></div>
+            <div id="drawing-mode-options" style="">
+                <label for="drawing-mode-selector">Mode:</label>
+                <select id="drawing-mode-selector">
+        <option>Pencil</option>
+        <option>Circle</option>
+        <option>Spray</option>
+        <option>Pattern</option>
 
-    <div style="display: inline-block; margin-left: 10px">
-        <button id="drawing-mode" class="btn btn-info">Cancel drawing mode</button><br>
-        <button id="clear-canvas" class="btn btn-info">Clear</button><br>
+        <option>hline</option>
+        <option>vline</option>
+        <option>square</option>
+        <option>diamond</option>
+        <option>texture</option>
+        </select><br>
 
-        <div id="drawing-mode-options" style="">
-            <label for="drawing-mode-selector">Mode:</label>
-            <select id="drawing-mode-selector">
-      <option>Pencil</option>
-      <option>Circle</option>
-      <option>Spray</option>
-      <option>Pattern</option>
+                <label for="drawing-line-width">Line width:</label>
+                <span class="info">30</span><input type="range" value="30" min="0" max="150" id="drawing-line-width"><br>
 
-      <option>hline</option>
-      <option>vline</option>
-      <option>square</option>
-      <option>diamond</option>
-      <option>texture</option>
-    </select><br>
+                <label for="drawing-color">Line color:</label>
+                <input type="color" value="#005E7A" id="drawing-color"><br>
 
-            <label for="drawing-line-width">Line width:</label>
-            <span class="info">30</span><input type="range" value="30" min="0" max="150" id="drawing-line-width"><br>
+                <label for="drawing-shadow-color">Shadow color:</label>
+                <input type="color" value="#005E7A" id="drawing-shadow-color"><br>
 
-            <label for="drawing-color">Line color:</label>
-            <input type="color" value="#005E7A" id="drawing-color"><br>
+                <label for="drawing-shadow-width">Shadow width:</label>
+                <span class="info">0</span><input type="range" value="0" min="0" max="50" id="drawing-shadow-width"><br>
 
-            <label for="drawing-shadow-color">Shadow color:</label>
-            <input type="color" value="#005E7A" id="drawing-shadow-color"><br>
-
-            <label for="drawing-shadow-width">Shadow width:</label>
-            <span class="info">0</span><input type="range" value="0" min="0" max="50" id="drawing-shadow-width"><br>
-
-            <label for="drawing-shadow-offset">Shadow offset:</label>
-            <span class="info">0</span><input type="range" value="0" min="0" max="50" id="drawing-shadow-offset"><br>
+                <label for="drawing-shadow-offset">Shadow offset:</label>
+                <span class="info">0</span><input type="range" value="0" min="0" max="50" id="drawing-shadow-offset"><br>
+            </div>
         </div>
+        <script src="canvas.js"></script> <br>
+
+        <button id="logout">Log out</button>
     </div>
-    <script src="canvas.js"></script>
+
+    <div id="register" style="display: none">
+        <form id="register_form">
+            <label>Mail
+                <input type="mail" name="mail_input" id="mail_input"> <br>
+            </label>
+            <label>Password
+                <input type="password" name="password_input" id="password_input"> <br>
+            </label>
+            <label>Confirm Password
+                <input type="password" name="conf_password_input" id="conf_password_input">
+            </label> <br>
+            <button>Submit</button>
+        </form> <br>
+        <text>Already have an account?</text> <br>
+        <button id="goToLogin">Log in</button>
+    </div>
+
+    <div id="login" style="display: block">
+        <form id="login_form">
+                <label>Mail
+                    <input type="mail" name="mail_input" id="mail_input"> <br>
+                </label>
+                <label>Password
+                    <input type="password" name="password_input" id="password_input"> <br>
+                </label>
+                <button>Submit</button>
+        </form> <br>
+        <text>Don't have an account?</text> <br>
+        <button id="goToRegister">Create an account</button>
+    </div>
 </body>
 
 </html>
+

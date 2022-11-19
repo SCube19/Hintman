@@ -1,6 +1,11 @@
 'use strict';
 
 import './popup.css';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword  } from "firebase/auth";
+import { initializeApp, registerVersion } from "firebase/app";
+
+
+
 
 (function() {
     // We will make use of Storage API to get and store `count` value
@@ -35,12 +40,21 @@ import './popup.css';
                 type: 'INCREMENT',
             });
         });
+        document.getElementById('incrementBtn').addEventListener('click', initFirebase);
 
         document.getElementById('decrementBtn').addEventListener('click', () => {
             updateCounter({
                 type: 'DECREMENT',
             });
         });
+        document.getElementById('logout').addEventListener('click', logout)
+        document.getElementById('goToRegister').addEventListener('click', goToRegister)
+        document.getElementById('goToLogin').addEventListener('click', goToLogin)
+
+        if (localStorage.getItem("email") !== null) {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("loggedIn").style.display = "block";
+        }
     }
 
     function updateCounter({ type }) {
@@ -95,6 +109,45 @@ import './popup.css';
 
     document.addEventListener('DOMContentLoaded', restoreCounter);
 
+    function formFunction() {
+        document.getElementById("login_form").addEventListener('submit', e => {
+            e.preventDefault();
+            const data = new FormData(e.target);
+            // console.log([...data.entries()]);
+            tryLogin([...data.entries()])
+          });
+    }
+
+    document.addEventListener('DOMContentLoaded', formFunction);
+    
+    function formFunctionRegister() {
+        document.getElementById("register_form").addEventListener('submit', e => {
+            e.preventDefault();
+            const data = new FormData(e.target);
+            // console.log([...data.entries()]);
+            tryRegister([...data.entries()])
+          });
+    }
+
+    document.addEventListener('DOMContentLoaded', formFunctionRegister);
+
+    function logout() {
+        localStorage.clear()
+        document.getElementById("loggedIn").style.display = "none";
+        document.getElementById("login").style.display = "block";
+    }
+
+    function goToRegister() {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("register").style.display = "block";
+    }
+
+    function goToLogin() {
+        document.getElementById("register").style.display = "none";
+        document.getElementById("login").style.display = "block";
+    }
+    
+
     // Communicate with background file by sending a message
     chrome.runtime.sendMessage({
             type: 'GREETINGS',
@@ -103,9 +156,10 @@ import './popup.css';
             },
         },
         (response) => {
-            console.log(response.message);
+            console.log(response);
         }
     );
+
 })();
 
 import { QRCodeRaw, QRCodeSVG, QRCodeCanvas, QRCodeText } from '@cheprasov/qrcode';
@@ -133,3 +187,118 @@ document.getElementById('qrcode').innerHTML = qrSVG.toString();
         document.getElementById('qrcode').innerHTML = "xd";
     });
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ----------------------------- FIREBASE ------------------------------------
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDxO5C3fG4AyhcZn_wKrYgSGJxer0RatF4",
+    authDomain: "hintman-f86e1.firebaseapp.com",
+    projectId: "hintman-f86e1",
+    storageBucket: "hintman-f86e1.appspot.com",
+    messagingSenderId: "366527975531",
+    appId: "1:366527975531:web:96ec38736b8e185215e12e",
+    measurementId: "G-S1JKPR54K8"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+
+function initFirebase() {
+  
+    // Initialize Firebase
+    console.log("siema")
+    const app = initializeApp(firebaseConfig);
+    console.log("siema")
+  
+    const email = "wektor@dupa.com"
+    const password = "123pass"
+
+    const auth = getAuth();
+
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+}
+
+function tryLogin(data) {
+    signInWithEmailAndPassword(auth, data[0][1], data[1][1])
+      .then((userCredential) => {
+        const user = userCredential.user;
+        localStorage.setItem('email', user.email);
+        document.getElementById("login").style.display = "none";
+        document.getElementById("loggedIn").style.display = "block";
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Authentication failed");
+      });
+}
+
+function tryRegister(data) {
+    if (data[1][1] !== data[2][1]) {
+        alert("Passwords aren't equal");
+        return;
+    }
+    createUserWithEmailAndPassword (auth, data[0][1], data[1][1])
+    .then((userCredential) => {
+        const user = userCredential.user;
+        localStorage.setItem('email', user.email);
+        document.getElementById("register").style.display = "none";
+        document.getElementById("loggedIn").style.display = "block";
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Invalid email address");
+      });
+}
+
+
