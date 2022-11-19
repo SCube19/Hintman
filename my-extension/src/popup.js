@@ -29,28 +29,10 @@ const fbstorage = getStorage();
         document.getElementById('goToRegister').addEventListener('click', goToRegister)
         document.getElementById('goToLogin').addEventListener('click', goToLogin)
         document.getElementById('save').addEventListener('click', canvasToBlob)
-    }
 
-    function setupFirebase() {
         if (localStorage.getItem("email") !== null) {
             document.getElementById("login").style.display = "none";
-            document.getElementById("loggedIn").style.display = "block";
-
-            const mail = localStorage.getItem("email");
-            const ident = mail + "/" + website_url;
-            console.log("hello " + ident);
-            const storageRef = ref(fbstorage, ident);
-
-            getDownloadURL(storageRef)
-                .then(url => {
-                    document.getElementById("website_url").style.display = "block";
-                    document.getElementById("qrcode").style.display = "block";
-                })
-                .catch(error => {
-                    console.log("dupa")
-                    document.getElementById("website_url").style.display = "none";
-                    document.getElementById("qrcode").style.display = "none";
-                });
+            document.getElementById("loggedIn").style.display = "block";  
         }
     }
 
@@ -121,10 +103,8 @@ const fbstorage = getStorage();
                 tab.id, { type: 'URL' },
                 (response) => {
                     console.log('GOT RESPONSE URL: ' + response.url);
-                    document.getElementById("website_url").innerText = response.url;
                     website_url = response.url;
                     updateQR(website_url);
-                    setupFirebase();
                 }
             );
         });
@@ -132,7 +112,6 @@ const fbstorage = getStorage();
 
 
     document.addEventListener('DOMContentLoaded', startFunction);
-    document.addEventListener('DOMContentLoaded', setupFirebase);
 })();
 
 
@@ -186,7 +165,6 @@ let s = (P5) => {
                         P5.mouseX + Math.sqrt(3) / 2 * weight, P5.mouseY + weight / 2
                     );
                     break;
-
             }
         }
     }
@@ -291,12 +269,17 @@ function canvasToBlob() {
         image.src = blob;
         const mail = localStorage.getItem("email");
 
+        if (website_url === undefined) {
+            alert("This website does not support logins!")
+            return;
+        }
+
         const ident = mail + "/" + website_url;
         const storageRef = ref(fbstorage, ident);
         console.log(ident)
         uploadBytes(storageRef, blob).then((snapshot) => {
             console.log('Uploaded a blob or file!');
         });
+        window.close();
     })
-    window.close();
 }
