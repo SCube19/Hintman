@@ -51,7 +51,7 @@ public class HintActivity extends AppCompatActivity {
         String loggedMail = preferences.getString("loggedMail", "");
 
         /* reference to user's hint */
-        StorageReference hintRef = FirebaseStorage.getInstance().getReference(loggedMail + "/" + page + ".png");
+        StorageReference hintRef = FirebaseStorage.getInstance().getReference(loggedMail + "/" + page);
 
         /* fetch user's hint from database and set it */
         try {
