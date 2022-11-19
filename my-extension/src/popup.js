@@ -154,21 +154,26 @@ import p5 from 'p5';
 
 ///////////////////////// CANVAS.JS ////////////////////////////////
 const size = 350;
+const backgroundColor = 200;
 
-let color = 'Black';
-let tool = 'triangle';
+let strokeColor = '#000000';
+let tool = 'pencil';
 let weight = 10;
+let mode = "draw";
 
 let s = (P5) => {
     P5.setup = () => {
-        //document.body.userSelect['userSelect'] = 'none';
         let canvas = P5.createCanvas(size, size);
-        P5.background(200);
+        P5.background(backgroundColor);
         canvas.style('pointer-events', 'none');
     }
 
     P5.draw = () => {
-        P5.stroke(color);
+        if (mode == "draw")
+            P5.stroke(strokeColor);
+        else
+            P5.stroke(backgroundColor);
+
         P5.strokeWeight(weight);
         if (P5.mouseIsPressed) {
             switch (tool) {
@@ -195,3 +200,30 @@ let s = (P5) => {
 }
 
 const P5 = new p5(s, "canvas");
+
+let buttons = document.querySelectorAll('button');
+
+buttons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        switch (e.target.id) {
+            case "pencil":
+            case "circle":
+            case "rect":
+            case "triangle":
+                tool = e.target.id;
+                break;
+            case "draw":
+            case "eraser":
+                mode = e.target.id;
+        }
+    })
+})
+
+document.getElementById('canvas-color').addEventListener('change', (e) => {
+    strokeColor = e.target.value;
+    console.log(strokeColor);
+})
+
+document.getElementById('canvas-weight').addEventListener('change', (e) => {
+    weight = e.target.value;
+})
