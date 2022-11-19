@@ -3,7 +3,7 @@
 import './popup.css';
 import p5 from "p5";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, storage, ref, uploadBytes, getDownloadURL  } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 import { QRCodeSVG } from '@cheprasov/qrcode';
 import { createPicker } from 'picmo';
@@ -19,7 +19,7 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-const storage = firebase.storage();
+const fbstorage = getStorage();
 // To get storage access, we have to mention it in `permissions` property of manifest.json file
 // More information on Permissions can we found at
 // https://developer.chrome.com/extensions/declare_permissions
@@ -29,26 +29,28 @@ const storage = firebase.storage();
         document.getElementById('goToRegister').addEventListener('click', goToRegister)
         document.getElementById('goToLogin').addEventListener('click', goToLogin)
         document.getElementById('save').addEventListener('click', canvasToBlob)
+    }
 
+    function setupFirebase() {
         if (localStorage.getItem("email") !== null) {
             document.getElementById("login").style.display = "none";
             document.getElementById("loggedIn").style.display = "block";
 
             const mail = localStorage.getItem("email");
-            const ident = mail + "/"+ website_url;
-            const storageRef = ref(storage, ident);
+            const ident = mail + "/" + website_url;
             console.log("hello " + ident);
-            storageRef.getDownloadURL().then(onResolve, onReject);
+            const storageRef = ref(fbstorage, ident);
 
-            function onResolve() {
-                getElementById("website_url").style.display = "block";
-                getElementById("qrcode").style.display = "block";
-            }
-
-            function onReject() {
-                getElementById("website_url").style.display = "hidden";
-                getElementById("qrcode").style.display = "hidden";
-            }
+            getDownloadURL(storageRef)
+                .then(url => {
+                    document.getElementById("website_url").style.display = "block";
+                    document.getElementById("qrcode").style.display = "block";
+                })
+                .catch(error => {
+                    console.log("dupa")
+                    document.getElementById("website_url").style.display = "none";
+                    document.getElementById("qrcode").style.display = "none";
+                });
         }
     }
 
@@ -122,6 +124,7 @@ const storage = firebase.storage();
                     document.getElementById("website_url").innerText = response.url;
                     website_url = response.url;
                     updateQR(website_url);
+                    setupFirebase();
                 }
             );
         });
@@ -297,7 +300,7 @@ function canvasToBlob() {
         const mail = localStorage.getItem("email");
 
         const ident = mail + "/"+ website_url;
-        const storageRef = ref(storage, ident);
+        const storageRef = ref(fbstorage, ident);
         console.log(ident)
         uploadBytes(storageRef, blob).then((snapshot) => {
             console.log('Uploaded a blob or file!');
