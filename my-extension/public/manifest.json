@@ -18,7 +18,9 @@
     },
     "permissions": [
         "storage",
-        "webRequest"
+        "webRequest",
+        "downloads",
+        "tabs"
     ],
     "content_scripts": [{
         "matches": [

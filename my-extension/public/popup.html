@@ -8,28 +8,65 @@
 </head>
 
 <body>
-    <div id="canvas-container">
-        <div id="canvas">
+    <div id="loggedIn" style="display: none">
+        <div id="qrcode">no qr code :(</div>
+        <div id="website_url">no url :(</div>
+        <button id="logout">Log out</button>
+        <div id="canvas-container">
+            <div id="canvas">
 
-        </div>
-        <div class="canvas-options">
-            <div class="canvas-modes">
-                <button id="draw">()</button>
-                <button id="eraser">#</button>
             </div>
-            <div class="canvas-values">
-                <input type="color" id="canvas-color" />
-                <input style="width: 3.7em" type="number" id="canvas-weight" />
-            </div>
-            <div id="canvas-tools">
-                <button id="pencil">I</button>
-                <button id="rect">[]</button>
-                <button id="circle">O</button>
-                <button id="triangle">^</button>
-            </div>
+            <div class="canvas-options">
+                <div class="canvas-modes">
+                    <button id="draw">()</button>
+                    <button id="eraser">#</button>
+                </div>
+                <div class="canvas-values">
+                    <input type="color" id="canvas-color" />
+                    <input style="width: 3.7em" type="number" id="canvas-weight" />
+                </div>
+                <div id="canvas-tools">
+                    <button id="pencil">I</button>
+                    <button id="rect">[]</button>
+                    <button id="circle">O</button>
+                    <button id="triangle">^</button>
+                </div>
 
+            </div>
         </div>
     </div>
+    <div id="register" style="display: none">
+        <form id="register_form">
+            <label>Mail
+            <input type="mail" name="mail_input" id="mail_input"> <br>
+        </label>
+            <label>Password
+            <input type="password" name="password_input" id="password_input"> <br>
+        </label>
+            <label>Confirm Password
+            <input type="password" name="conf_password_input" id="conf_password_input">
+        </label> <br>
+            <button>Submit</button>
+        </form> <br>
+        <text>Already have an account?</text> <br>
+        <button id="goToLogin">Log in</button>
+    </div>
+
+    <div id="login" style="display: block">
+        <form id="login_form">
+            <label>Mail
+            <input type="mail" name="mail_input" id="mail_input"> <br>
+        </label>
+            <label>Password
+            <input type="password" name="password_input" id="password_input"> <br>
+        </label>
+            <button>Submit</button>
+        </form> <br>
+        <text>Don't have an account?</text> <br>
+        <button id="goToRegister">Create an account</button>
+    </div>
+
+
     <script src="popup.js"></script>
 </body>
 
