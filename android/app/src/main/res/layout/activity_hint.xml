@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".HintActivity">
+
+    <ImageView
+        android:id="@+id/hint_image"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/hint_text"
+        android:layout_width="350dp"
+        android:layout_height="110dp"
+        android:layout_marginBottom="45dp"
+        android:gravity="center"
+        android:text="@string/tmp"
+        android:textColor="@color/text_color"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/hint_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/scan_button"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_border"
+        android:text="@string/scan_again"
+        android:textColor="@color/text_color"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hint_image" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
