@@ -11,6 +11,7 @@
         android:id="@+id/hint_image"
         android:layout_width="350dp"
         android:layout_height="350dp"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,13 +20,13 @@
 
     <TextView
         android:id="@+id/hint_text"
-        android:layout_width="237dp"
-        android:layout_height="74dp"
-        android:layout_marginBottom="50dp"
+        android:layout_width="350dp"
+        android:layout_height="110dp"
+        android:layout_marginBottom="45dp"
+        android:gravity="center"
         android:text="@string/tmp"
         android:textColor="@color/text_color"
-        android:textSize="30sp"
-        android:gravity="center"
+        android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/hint_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
