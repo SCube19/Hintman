@@ -93,7 +93,42 @@ code {
     opacity: 0.1;
 }
 
-canvas {
+body {
+    width: 600px;
+    height: 400px;
+}
+
+.canvas-options {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.canvas-modes {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    gap: 1em
+}
+
+.canvas-values {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1em;
+}
+
+.canvas-tools {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1em;
+}
+
+#canvas {
     box-shadow: 10px 10px 10px grey;
     border: 1px solid black;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -153,35 +153,44 @@ import p5 from 'p5';
 
 
 ///////////////////////// CANVAS.JS ////////////////////////////////
+const size = 350;
+
+let color = 'Black';
+let tool = 'triangle';
+let weight = 10;
 
 let s = (P5) => {
-    let color = "Black";
-
     P5.setup = () => {
         //document.body.userSelect['userSelect'] = 'none';
-        let canvas = P5.createCanvas(200, 200);
+        let canvas = P5.createCanvas(size, size);
         P5.background(200);
         canvas.style('pointer-events', 'none');
     }
 
     P5.draw = () => {
         P5.stroke(color);
-        P5.strokeWeight(4);
-        if (P5.mouseIsPressed)
-            P5.line(P5.mouseX, P5.mouseY, P5.pmouseX, P5.pmouseY);
-    }
+        P5.strokeWeight(weight);
+        if (P5.mouseIsPressed) {
+            switch (tool) {
+                case 'pencil':
+                    P5.line(P5.mouseX, P5.mouseY, P5.pmouseX, P5.pmouseY);
+                    break;
+                case 'rect':
+                    P5.rect(P5.mouseX - weight / 2, P5.mouseY - weight / 2, weight, weight);
+                    break;
+                case 'circle':
+                    P5.circle(P5.mouseX, P5.mouseY, weight);
+                    break;
+                case 'triangle':
+                    P5.triangle(P5.mouseX - Math.sqrt(3) / 2 * weight, P5.mouseY + weight / 2,
+                        P5.mouseX, P5.mouseY - weight,
+                        P5.mouseX + Math.sqrt(3) / 2 * weight, P5.mouseY + weight / 2
+                    );
+                    //console.log(`${P5.mouseX - Math.sqrt(3) / 2 * weight} ${P5.mouseY + weight / 2} ${P5.moouseX} ${P5.mouseY + weight} ${P5.mouseX + Math.sqrt(3) / 2 * weight} ${P5.mouseY + weight / 2} `);
+                    break;
 
-    P5.keyPressed = () => {
-        if (P5.key == 'e')
-            P5.clear();
-        else if (P5.key == 'r')
-            color = "Red";
-        else if (P5.key == 'b')
-            color = "Blue";
-        else if (P5.key == 'g')
-            color = "Green";
-        else if (P5.key == 'z')
-            color = "Black";
+            }
+        }
     }
 }
 

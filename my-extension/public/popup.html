@@ -8,27 +8,27 @@
 </head>
 
 <body>
-    <div class="app">
-        <p class="counter-label">Counter</p>
-        <div id="counter" class="counter"></div>
-        <div class="button-container">
-            <button id="decrementBtn" class="button">-</button>
-            <button id="incrementBtn" class="button">+</button>
+    <div id="canvas-container">
+        <div id="canvas">
+
         </div>
+        <div class="canvas-options">
+            <div class="canvas-modes">
+                <button>()</button>
+                <button>#</button>
+            </div>
+            <div class="canvas-values">
+                <input type="color" id="canvas-color" />
+                <input style="width: 3.7em" type="number" id="canvas-weight" />
+            </div>
+            <div class="canvas-tools">
+                <button>I</button>
+                <button>[]</button>
+                <button>O</button>
+                <button>^</button>
+            </div>
 
-        <hr class="divider" />
-
-        <p class="title">Chrome Extension is Ready!</p>
-        <p class="subtitle">Start by updating <code>popup.html</code></p>
-    </div>
-    <!--
-      This HTML file opens when you click on icon from the toolbar.
-
-      To begin the development, run `npm run watch`.
-      To create a production bundle, use `npm run build`.
-    -->
-    <div style="margin:auto" id="canvas">
-
+        </div>
     </div>
     <script src="popup.js"></script>
 </body>
