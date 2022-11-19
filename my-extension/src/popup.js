@@ -3,10 +3,23 @@
 import './popup.css';
 import p5 from "p5";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 import { QRCodeSVG } from '@cheprasov/qrcode';
 
-
+let website_url = undefined;
+const firebaseConfig = {
+    apiKey: "AIzaSyDxO5C3fG4AyhcZn_wKrYgSGJxer0RatF4",
+    authDomain: "hintman-f86e1.firebaseapp.com",
+    projectId: "hintman-f86e1",
+    storageBucket: "hintman-f86e1.appspot.com",
+    messagingSenderId: "366527975531",
+    appId: "1:366527975531:web:96ec38736b8e185215e12e",
+    measurementId: "G-S1JKPR54K8"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const storage = firebase.storage();
 // To get storage access, we have to mention it in `permissions` property of manifest.json file
 // More information on Permissions can we found at
 // https://developer.chrome.com/extensions/declare_permissions
@@ -15,10 +28,27 @@ import { QRCodeSVG } from '@cheprasov/qrcode';
         document.getElementById('logout').addEventListener('click', logout)
         document.getElementById('goToRegister').addEventListener('click', goToRegister)
         document.getElementById('goToLogin').addEventListener('click', goToLogin)
+        document.getElementById('save').addEventListener('click', canvasToBlob)
 
         if (localStorage.getItem("email") !== null) {
             document.getElementById("login").style.display = "none";
             document.getElementById("loggedIn").style.display = "block";
+
+            const mail = localStorage.getItem("email");
+            const ident = mail + "/"+ website_url;
+            const storageRef = ref(storage, ident);
+            console.log("hello " + ident);
+            storageRef.getDownloadURL().then(onResolve, onReject);
+
+            function onResolve() {
+                getElementById("website_url").style.display = "block";
+                getElementById("qrcode").style.display = "block";
+            }
+
+            function onReject() {
+                getElementById("website_url").style.display = "hidden";
+                getElementById("qrcode").style.display = "hidden";
+            }
         }
     }
 
@@ -77,7 +107,7 @@ import { QRCodeSVG } from '@cheprasov/qrcode';
         document.getElementById("login").style.display = "block";
     }
 
-    let website_url = undefined;
+    
 
     function startFunction() {
         // Communicate with content script of
@@ -189,19 +219,6 @@ document.getElementById('canvas-weight').addEventListener('change', (e) => {
 
 
 // ----------------------------- FIREBASE ------------------------------------
-const firebaseConfig = {
-    apiKey: "AIzaSyDxO5C3fG4AyhcZn_wKrYgSGJxer0RatF4",
-    authDomain: "hintman-f86e1.firebaseapp.com",
-    projectId: "hintman-f86e1",
-    storageBucket: "hintman-f86e1.appspot.com",
-    messagingSenderId: "366527975531",
-    appId: "1:366527975531:web:96ec38736b8e185215e12e",
-    measurementId: "G-S1JKPR54K8"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
-
 function tryLogin(data) {
     signInWithEmailAndPassword(auth, data[0][1], data[1][1])
         .then((userCredential) => {
@@ -233,4 +250,21 @@ function tryRegister(data) {
             console.log(error);
             alert("Invalid email address");
         });
+}
+
+function canvasToBlob() {
+    document.getElementById("defaultCanvas0").toBlob((blob) => 
+        {
+        var image = new Image();
+        image.src = blob;
+        const mail = localStorage.getItem("email");
+
+        const ident = mail + "/"+ website_url;
+        const storageRef = ref(storage, ident);
+        console.log(ident)
+        uploadBytes(storageRef, blob).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+          });
+        })
+        window.close();
 }
