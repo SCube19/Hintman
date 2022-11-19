@@ -5,7 +5,7 @@ import p5 from "p5";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { QRCodeSVG } from '@cheprasov/qrcode';
-
+import { createPicker } from 'picmo';
 
 // To get storage access, we have to mention it in `permissions` property of manifest.json file
 // More information on Permissions can we found at
@@ -185,6 +185,43 @@ document.getElementById('canvas-weight').addEventListener('change', (e) => {
 
 
 
+
+///////////////////////////////// EMOJI ///////////////////////////////////////
+
+const emojiField = document.getElementById("emoji-field");
+const emojiBackspace = document.getElementById("emoji-backspace");
+const rootElement = document.getElementById("emoji-palette");
+const picker = createPicker({ rootElement });
+
+let emojiArray = [];
+
+picker.addEventListener('emoji:select', event => {
+  emojiArray.push(event.emoji);
+  emojiField.innerText = emojiArray.join("");
+});
+
+emojiBackspace.addEventListener("click", () => {
+  emojiArray.pop();
+  emojiField.innerText = emojiArray.join("");
+});
+
+
+const canvasContainer = document.getElementById("canvas-container");
+const emojiContainer = document.getElementById("emoji-container");
+const switchButton = document.getElementById("switch");
+
+switchButton.addEventListener("click", () => {
+  if (canvasContainer.style.display === "none") {
+    canvasContainer.style.display = "block";
+    emojiContainer.style.display = "none";
+    canvas.background(backgroundColor);
+  } else {
+    canvasContainer.style.display = "none";
+    emojiContainer.style.display = "block";
+    emojiArray = [];
+    emojiField.innerText = "";
+  }
+});
 
 
 
