@@ -1,6 +1,7 @@
 'use strict';
 
 import './popup.css';
+import { QRCodeSVG } from '@cheprasov/qrcode';
 
 (function () {
   // We will make use of Storage API to get and store `count` value
@@ -96,8 +97,26 @@ import './popup.css';
     });
   }
 
+  function updateQR(url) {
+    const qrSVG = new QRCodeSVG(url, {
+      level: 'Q',
+      image: {
+          source: "https://i.ebayimg.com/images/g/WK8AAOSw4Fdck1Zt/s-l500.jpg",
+          width: '20%',
+          height: '20%',
+          x: 'center',
+          y: 'center',
+          border: null,
+      },
+    });
+
+    const divElement = document.getElementById('qrcode');
+    divElement.innerHTML = qrSVG.toString();
+  }
+
   document.addEventListener('DOMContentLoaded', restoreCounter);
 
+  let website_url = undefined;
 
   function startFunction() {
     // Communicate with content script of
@@ -111,6 +130,8 @@ import './popup.css';
         (response) => {
           console.log('GOT RESPONSE URL: ' + response.url);
           document.getElementById("website_url").innerText = response.url;
+          website_url = response.url;
+          updateQR(website_url);
         }
       );
     });
@@ -119,13 +140,6 @@ import './popup.css';
 
   document.addEventListener('DOMContentLoaded', startFunction);
 
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.type === 'POST') {
-      console.log(`CAUGHT POST FROM BACKGROUND -> THIS IS "POST" ;D -> SURELY NOT UNDEFINED ->>>> ${request}`);
-      sendResponse({});
-      return true;
-    }
-  });
 
   // Communicate with background file by sending a message
   // chrome.runtime.sendMessage(
