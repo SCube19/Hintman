@@ -100,3 +100,14 @@ button,
 input {
     cursor: pointer;
 }
+
+#emoji-field {
+    height: 100px;
+    width: 100px;
+    background-color: lightgray;
+}
+
+#emoji-backspace {
+    width: 50px;
+    height: 20px;
+}
