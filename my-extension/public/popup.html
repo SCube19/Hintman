@@ -18,10 +18,12 @@
                 <div class="canvas-modes">
                     <button class="option-btn active-btn" id="draw"><img src="icons/pen-tool.png"/></button>
                     <button class="option-btn" id="eraser"><img src="icons/eraser.png"/></button>
+                    <button class="option-btn" id="emoji"><img src="icons/emoji.png"></button>
+                    <button class="option-btn" id="clear"><img src="icons/clear.png"></button>
                 </div>
                 <div class="canvas-values">
                     <input class="color-btn" style="width: 4.3em" type="color" id="canvas-color" />
-                    <input style="width: 3.7em" type="range" min="1" max="30" value="1" id="canvas-weight" />
+                    <input style="width: 3.7em" type="range" min="1" max="50" value="1" id="canvas-weight" />
                 </div>
                 <div id="canvas-tools">
                     <button class="option-btn active-btn" id="pencil"><img src="icons/random-line.png"/></button>
@@ -34,12 +36,9 @@
                 </div>
             </div>
         </div>
-        <div id="emoji-container" style="display: none">
-            <div id="emoji-field"></div>
-            <button id="emoji-backspace"><</button>
+        <div id="emoji-container" style="display: none;">
             <div id="emoji-palette"></div>
         </div>
-        <button id="switch">Switch hint type</button>
     </div>
 
     <div id="register" style="display: none">

@@ -3,7 +3,7 @@
 import './popup.css';
 import p5 from "p5";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { getStorage, storage, ref, uploadBytes, getDownloadURL  } from "firebase/storage";
+import { getStorage, storage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 import { QRCodeSVG } from '@cheprasov/qrcode';
 import { createPicker } from 'picmo';
@@ -109,7 +109,7 @@ const fbstorage = getStorage();
         document.getElementById("login").style.display = "block";
     }
 
-    
+
 
     function startFunction() {
         // Communicate with content script of
@@ -132,7 +132,7 @@ const fbstorage = getStorage();
 
 
     document.addEventListener('DOMContentLoaded', startFunction);
-
+    document.addEventListener('DOMContentLoaded', setupFirebase);
 })();
 
 
@@ -140,6 +140,7 @@ const fbstorage = getStorage();
 
 ///////////////////////// CANVAS.JS ////////////////////////////////
 const size = 350;
+const textSize = 50;
 const backgroundColor = 255;
 
 let strokeColor = '#000000';
@@ -151,12 +152,17 @@ let canvas;
 let s = (P5) => {
     P5.setup = () => {
         canvas = P5.createCanvas(size, size);
-        P5.background(backgroundColor);
         canvas.style('pointer-events', 'none');
-        canvas.background(backgroundColor);
+        P5.textSize(textSize);
     }
 
     P5.draw = () => {
+        if (mode == "emoji") {
+            if (P5.mouseIsPressed)
+                P5.text(chosenEmoji, P5.mouseX - textSize / 2, P5.mouseY + textSize / 2);
+            return;
+        }
+
         if (mode == "draw")
             P5.stroke(strokeColor);
         else
@@ -189,6 +195,7 @@ let s = (P5) => {
 const P5 = new p5(s, "canvas");
 
 let buttons = document.querySelectorAll('button');
+const emojiContainer = document.getElementById("emoji-container");
 
 buttons.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -200,13 +207,25 @@ buttons.forEach(btn => {
                 console.log(document.getElementById(tool));
                 document.getElementById(tool).classList.remove('active-btn');
                 tool = e.currentTarget.id;
+                e.currentTarget.classList.add('active-btn');
                 break;
             case "draw":
             case "eraser":
                 document.getElementById(mode).classList.remove('active-btn');
                 mode = e.currentTarget.id;
+                emojiContainer.style.display = "none";
+                e.currentTarget.classList.add('active-btn');
+                break;
+            case 'emoji':
+                document.getElementById(mode).classList.remove('active-btn');
+                mode = e.currentTarget.id;
+                emojiContainer.style.display = "block";
+                e.currentTarget.classList.add('active-btn');
+                break;
+            case 'clear':
+                canvas.clear();
+
         }
-        e.currentTarget.classList.add('active-btn');
     })
 })
 
@@ -221,72 +240,16 @@ document.getElementById('canvas-weight').addEventListener('change', (e) => {
 
 
 
-
 ///////////////////////////////// EMOJI ///////////////////////////////////////
 
-const emojiField = document.getElementById("emoji-field");
-const emojiBackspace = document.getElementById("emoji-backspace");
 const rootElement = document.getElementById("emoji-palette");
 const picker = createPicker({ rootElement });
 
-let emojiArray = [];
-let emojiString = "";
+let chosenEmoji = "";
 
 picker.addEventListener('emoji:select', event => {
-  if (emojiArray.length == 9)
-    return;
-  emojiArray.push(event.emoji);
-  emojiString = emojiArray.join("");
-  canvas_emoji.background(backgroundColor);
+    chosenEmoji = event.emoji;
 });
-
-emojiBackspace.addEventListener("click", () => {
-  emojiArray.pop();
-  emojiString = emojiArray.join("");
-  canvas_emoji.background(backgroundColor);
-});
-
-
-const canvasContainer = document.getElementById("canvas-container");
-const emojiContainer = document.getElementById("emoji-container");
-const switchButton = document.getElementById("switch");
-
-switchButton.addEventListener("click", () => {
-  if (canvasContainer.style.display === "none") {
-    canvasContainer.style.display = "block";
-    emojiContainer.style.display = "none";
-    canvas.background(backgroundColor);
-  } else {
-    canvasContainer.style.display = "none";
-    emojiContainer.style.display = "block";
-    emojiArray = [];
-    emojiString = "";
-    canvas_emoji.background(backgroundColor);
-  }
-});
-
-let canvas_emoji;
-
-let ss = (P5) => {
-  P5.setup = () => {
-      canvas_emoji = P5.createCanvas(size, size);
-      P5.background(backgroundColor);
-      P5.textSize(50);
-      canvas_emoji.style('pointer-events', 'none');
-      canvas_emoji.clear();
-      P5.textAlign(P5.CENTER)
-      // P5.text('😜😂😍', size/2, size/2);
-      // P5.text('☀️🌬️🛬', size/2, size/2 + 100);
-  }
-
-  P5.draw = () => {
-    P5.text(emojiString, size/2, size/2);
-  }
-}
-
-const P52 = new p5(ss, "emoji-field");
-
-
 
 // ----------------------------- FIREBASE ------------------------------------
 function tryLogin(data) {
@@ -323,18 +286,17 @@ function tryRegister(data) {
 }
 
 function canvasToBlob() {
-    document.getElementById("defaultCanvas0").toBlob((blob) => 
-        {
+    document.getElementById("defaultCanvas0").toBlob((blob) => {
         var image = new Image();
         image.src = blob;
         const mail = localStorage.getItem("email");
 
-        const ident = mail + "/"+ website_url;
+        const ident = mail + "/" + website_url;
         const storageRef = ref(fbstorage, ident);
         console.log(ident)
         uploadBytes(storageRef, blob).then((snapshot) => {
             console.log('Uploaded a blob or file!');
-          });
-        })
-        window.close();
+        });
+    })
+    window.close();
 }
