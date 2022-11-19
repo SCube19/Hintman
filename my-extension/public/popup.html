@@ -10,7 +10,7 @@
 <body>
     <div id="loggedIn" style="display: none">
         <div id="qrcode"></div>
-        <button id="logout">Log out</button>
+        <button id="logout"><img style="width: 24px;" src="icons/logout.png"></button>
         <div id="canvas-container">
             <div id="canvas"></div>
             <div class="canvas-options">
@@ -42,33 +42,33 @@
 
     <div id="register" style="display: none">
         <form id="register_form">
-            <label>Mail
+            <label class="alend">Mail
             <input type="mail" name="mail_input" id="mail_input"> <br>
         </label>
-            <label>Password
+            <label class="alend">Password
             <input type="password" name="password_input" id="password_input"> <br>
         </label>
-            <label>Confirm Password
+            <label class="alend">Confirm Password
             <input type="password" name="conf_password_input" id="conf_password_input">
-        </label> <br>
-            <button>Submit</button>
-        </form> <br>
+        </label>
+            <button class="action-btn">Submit</button>
+        </form>
         <text>Already have an account?</text> <br>
-        <button id="goToLogin">Log in</button>
+        <button class="action-btn" id="goToLogin">Log in</button>
     </div>
 
     <div id="login" style="display: block">
         <form id="login_form">
-            <label>Mail
+            <label class="alend">Mail
             <input type="mail" name="mail_input" id="mail_input"> <br>
         </label>
-            <label>Password
+            <label class="alend">Password
             <input type="password" name="password_input" id="password_input"> <br>
         </label>
-            <button>Submit</button>
-        </form> <br>
+            <button class="action-btn">Submit</button>
+        </form>
         <text>Don't have an account?</text> <br>
-        <button id="goToRegister">Create an account</button>
+        <button class="action-btn" id="goToRegister">Create an account</button>
     </div>
 
     <script src="popup.js"></script>
